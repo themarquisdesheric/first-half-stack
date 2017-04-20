@@ -5,5 +5,5 @@ const server = http.createServer(app);
 const PORT = 3000;
 
 server.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`); //eslint-disable-line
+  console.log(`server running on port ${PORT}`);
 });
