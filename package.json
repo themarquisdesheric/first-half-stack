@@ -4,6 +4,7 @@
   "description": "",
   "main": "connect.js",
   "scripts": {
+    "pretest": "eslint .",
     "test": "mocha",
     "start": "nodemon server.js"
   },
