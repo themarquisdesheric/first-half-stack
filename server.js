@@ -1,9 +1,12 @@
-const http = require('http');
-const app = require('./lib/app');
+const express = require('express');
+const app = express();
 
-const server = http.createServer(app);
-const PORT = 3000;
-
-server.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`);
+app.get('/', (req, res) => {
+  res.send('hello world!');
 });
+
+app.listen(3000, () => {
+  console.log('app listening on port 3000!'); // eslint-disable-line
+});
+
+module.exports = app;
