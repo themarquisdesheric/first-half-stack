@@ -1,12 +1,5 @@
-const express = require('express');
-const app = express();
+// const app = require('./lib/app');
+const DB_URI = 'mongodb://localhost:27017/bicycles';
 
-app.get('/', (req, res) => {
-  res.send('hello world!');
-});
-
-app.listen(3000, () => {
-  console.log('app listening on port 3000!'); // eslint-disable-line
-});
-
-module.exports = app;
+const connection = require('./lib/connect');
+connection.connect(DB_URI);
