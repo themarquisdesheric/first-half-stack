@@ -7,16 +7,6 @@ const app = require('../lib/app');
 const connection = require('../lib/connect');
 const request = chai.request(app);
 
-describe('GET /', () => {
-
-  it('says hello world', () => {
-    return request
-      .get('/')
-      .then(res => res.text)
-      .then(text => assert.equal(text, 'hello world!'));
-  });
-});
-
 describe('POST', () => {
   
   const DB_URI = 'mongodb://localhost:27017/bicycles-test';
@@ -30,8 +20,20 @@ describe('POST', () => {
       .post('/bicycles')
       .send({ make: 'Trek', type: 'road' })
       .then(res => res.body)
-      .then(res => {
-        assert.ok(res._id);
-      });
+      .then(res => assert.ok(res._id))
+      .catch(err => console.log(err)); // eslint-disable-line
   });
+
+  describe('GET /', () => {
+
+    it('returns an array of resources in the database', () => {
+      return request
+        .get('/')
+        .then(res => {
+          assert.ok(res.body[0]._id);
+        })
+        .catch(err => console.log(err)); // eslint-disable-line
+    });
+  });
+  
 });
