@@ -7,7 +7,9 @@ const app = require('../lib/app');
 const connection = require('../lib/connect');
 const request = chai.request(app);
 
-describe('POST /bicycles', () => {
+const testBike = { make: 'Trek', type: 'road' };
+
+describe('POST', () => {
   
   const DB_URI = 'mongodb://localhost:27017/bicycles-test';
 
@@ -18,22 +20,31 @@ describe('POST /bicycles', () => {
   it('saves a bicycle', () => {
     return request
       .post('/bicycles')
-      .send({ make: 'Trek', type: 'road' })
+      .send(testBike)
       .then(res => res.body)
-      .then(res => assert.ok(res._id))
+      .then(res => {
+        testBike._id = res._id;
+        assert.ok(res._id);
+      })
       .catch(err => console.log(err)); // eslint-disable-line
   });
 
-  describe('GET /bicycles', () => {
+  describe('GET', () => {
 
-    it('returns an array of resources in the database', () => {
+    it('GET /bicycles returns an array of resources in the database', () => {
       return request
         .get('/bicycles')
-        .then(res => {
-          assert.ok(res.body[0]._id);
-        })
+        .then(res => res.body)
+        .then(res => assert.ok(res[0]._id))
         .catch(err => console.log(err)); // eslint-disable-line
     });
+  });
+
+  it('GET /bicycles/:id returns that document', () => {
+    return request
+      .get(`/bicycles/${testBike._id}`)
+      .then(res => res.body)
+      .then(res => assert.deepEqual(res, testBike));
   });
   
 });
