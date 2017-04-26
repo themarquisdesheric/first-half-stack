@@ -51,7 +51,6 @@ describe('POST', () => {
   it('GET /bicycles/:id returns 404 if document does not exist', () => {
     return request
       .get(`/bicycles/${falseId}`)
-      .then(res => res.body)
       .then(() => {
         throw new Error('successful status code not expected');
       },
