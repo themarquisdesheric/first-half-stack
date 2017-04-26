@@ -8,6 +8,7 @@ const connection = require('../lib/connect');
 const request = chai.request(app);
 
 const testBike = { make: 'Trek', type: 'road' };
+const falseId = '58f9184cbf2107d41aba7679';
 
 describe('POST', () => {
   
@@ -45,6 +46,16 @@ describe('POST', () => {
       .get(`/bicycles/${testBike._id}`)
       .then(res => res.body)
       .then(res => assert.deepEqual(res, testBike));
+  });
+
+  it('GET /bicycles/:id returns 404 if document does not exist', () => {
+    return request
+      .get(`/bicycles/${falseId}`)
+      .then(res => res.body)
+      .then(() => {
+        throw new Error('successful status code not expected');
+      },
+      res => res.status, 404);
   });
   
 });
