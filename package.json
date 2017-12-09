@@ -1,0 +1,33 @@
+{
+  "name": "first-half-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "connect.js",
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "mocha",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themarquisdesheric/first-half-stack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/themarquisdesheric/first-half-stack/issues"
+  },
+  "homepage": "https://github.com/themarquisdesheric/first-half-stack#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26",
+    "morgan": "^1.8.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "eslint": "^3.19.0",
+    "mocha": "^3.2.0"
+  }
+}
